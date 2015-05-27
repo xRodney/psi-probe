@@ -65,3 +65,10 @@ em {
 	padding: 0 0 1em 0;
 	line-height: 1.5em;
 }
+
+#deployDialog {
+    position: absolute;
+    width: 50%;
+    background-color: #ebf8ff;
+    margin-left: 25%;
+}

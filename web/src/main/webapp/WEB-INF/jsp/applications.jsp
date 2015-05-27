@@ -30,7 +30,9 @@
 		<script type="text/javascript" language="javascript" src="<c:url value='/js/scriptaculous.js'/>"></script>
 		<script type="text/javascript" language="javascript" src="<c:url value='/js/effects.js'/>"></script>
 		<script type="text/javascript" language="javascript" src="<c:url value='/js/func.js'/>"></script>
+		<script type="text/javascript" language="javascript" src="<c:url value='/js/dropdeploy.js'/>"></script>
 		<script type="text/javascript" language="javascript" src="<c:url value='/js/behaviour.js'/>"></script>
+		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}<spring:theme code='deploy.css'/>"/>
 	</head>
 
 	<body>
@@ -107,7 +109,7 @@
 		</li>
 	</ul>
 
-	<div class="blockContainer">
+	<div class="blockContainer" id="drop">
 
 		<div id="help" class="helpMessage" style="display: none;">
 			<div class="ajax_activity"></div>
@@ -126,6 +128,31 @@
 				${successMessage}
 			</div>
 		</c:if>
+
+                <div id="deployDialog" class="deploy" style="display: none">
+                        <span class="deployLabel"><spring:message code="probe.jsp.deployment.s1.title"/></span>
+
+                        <div class="deployDescription"><spring:message code="probe.jsp.deployment.s1.description"/></div>
+
+                        <form action="<c:url value='/adm/war.htm'/>" method="post" enctype="multipart/form-data">
+                                <dl>
+                                        <dt><label for="filename"><spring:message code="probe.jsp.deployment.s1.file.label"/></label></dt>
+                                        <dd><div id="filename"></div></dd>
+                                        <dt><label for="context"><spring:message code="probe.jsp.deployment.s2.context.label"/>&nbsp;</label></dt>
+                                        <dd><input id="context" type="text" name="context" size="90"/></dd>
+                                        <dt><span class="cb"><input id="update" type="checkbox" name="update" value="yes"/><label for="update">&nbsp;
+                                                                <spring:message code="probe.jsp.deployment.s1.update.label"/></label></span></dt>
+                                        <dt><span class="cb"><input id="discard" type="checkbox" name="discard" value="yes"/><label for="discard">&nbsp;
+                                                                <spring:message code="probe.jsp.deployment.s1.discard.label"/></label></span></dt>
+                                        <dt><span class="cb"><input id="compile" type="checkbox" name="compile" value="yes"/><label for="compile">&nbsp;
+                                                                <spring:message code="probe.jsp.deployment.s1.compile.label"/></label></span></dt>
+
+                                        <dd class="submit">
+                                                <input class="b" id="progress" type="submit" value="<spring:message code='probe.jsp.deployment.s1.submit'/>"/>
+                                        </dd>
+                                </dl>
+                        </form>
+                </div>
 
 		<display:table class="genericTbl" name="apps" uid="app" cellspacing="0" requestURI="" defaultsort="1"
 				defaultorder="ascending" cellpadding="0">
